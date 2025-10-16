@@ -7,6 +7,14 @@ body {
     color: black;
 }
 
+.nav-link {
+    color: white !important;
+}
+
+.nav-link.active {
+    font-weight: 900;
+}
+
 
 main {
     max-width: 900px;
