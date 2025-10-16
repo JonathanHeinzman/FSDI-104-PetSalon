@@ -1,9 +1,18 @@
 // Get the form - To have access to the input fields
 const userRegistrationForm = document.querySelector("form");
-const cardContainer = document.getElementById("cardContainer");
+const petTableBody = document.getElementById("petTableBody");
+function Pet (name, age, gender, animal, breed, service) {
+    this.name = name;
+    this.age = age;
+    this.animal = animal;
+    this.gender = gender;
+    this.breed = breed;
+    this.service = service;    
+}
 
-// Action/function that will be triffered after clicking "Register"
-function registerUser() {
+
+// Action/function that will be triggered after clicking "Register"
+function registerUser(event) {
     // Prevent the browser to be refreshed - To see the logs
     event.preventDefault();
 
@@ -18,50 +27,108 @@ function registerUser() {
     const breed =  userRegistrationForm.elements["breed"].value;
     const service =  userRegistrationForm.elements["service"].value;
 
-    // Use the information
-    console.log(`Name: ${name}, Age: ${age}, Amimal: ${animal}, Gender ${gender}, Breed ${breed}
-    `);
+    console.log(name);
 
-    // Create dynamic content
-    const card = document.createElement("div");
-    card.className = "col-md-4 m-5"
+    let newPet = new Pet(name, age, animal, gender, breed, service);
 
-    card.innerHTML = `
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h3 class="card-title"> ${name} </h3>
-                <h5 class="card-subtitle mb-2"> ${age} </h5>
-                <h5 class="card-subtitle mb-2"> ${animal} </h5>
-                <h5 class="card-subtitle mb-2"> ${gender} </h5>
-                <h5 class="card-subtitle mb-2"> ${breed} </h5>       
-                <h5 class="card-subtitle mb-2"> ${service} </h5>          
-            </div>      
-        </div>
-    `;
+    displayRow(newPet);
 
-    // Add the card to the div
-    cardContainer.appendChild(card);
+
 
     // Clear the form
     userRegistrationForm.reset();
 
 }
 
+// New function: displayRow (replaces displayPetNames)
+function displayRow(newPet){
+    
+    const tableBody = document.getElementById("petTableBody");
+   
+    const row = document.createElement("tr");
 
+    row.innerHTML = `
+        <td>${newPet.name}</td>
+        <td>${newPet.age}</td>
+        <td>${newPet.animal}</td>
+        <td>${newPet.gender}</td>
+        <td>${newPet.breed}</td>
+        <td>${newPet.service}</td>
+        <td>
+        <button class="btn btn-danger" onclick="deleteRow(this)">Delete</button>
+        </td>
+    
+     `;
+
+    tableBody.appendChild(row);
+}
+ 
+
+
+function deleteRow(button){
+    // Get the parent row of the clicked button
+    let row = button.parentNode.parentNode;
+
+    // Remove the row from the table
+    row.parentNode.removeChild(row);
+        
+}
+
+
+
+//class 4
 /*
-const pets = [
-    // Pet Registration
-    function Pet (name, age, gender, animal, breed, service) {
-        this.name = name,
-        this.age = age,
-        this.gender = gender,
-        this.animal = animal,
-        this.breed = breed,
-        this.service = service    
-    }
-    let pet1 = new Pet("Kobe", 4, "Male", "Dog", "Maltipoo","The Works")
-    let pet2 = new Pet("Pau", 1, "Male", "Dog", "Havapoo","The Works")
-    let pet3 = new Pet("Mia", 11, "Female", "Cat", "Persian Himalayan","The Works")
+function Pet (name, age, gender, animal, breed, service) {
+    this.name = name,
+    this.age = age,
+    this.animal = animal,
+    this.gender = gender,
+    this.breed = breed,
+    this.service = service    
+}
+
+function registerPet(event){
+    event.preventDefault{};
+
+    const name = userRegistrationForm.elements["name"].value;
+    const age = userRegistrationForm.elements["age"].value;
+    const animal =  userRegistrationForm.elements["animal"].value;
+    const gender =  userRegistrationForm.elements["gender"].value;
+    const breed =  userRegistrationForm.elements["breed"].value;
+    const service =  userRegistrationForm.elements["service"].value;
+
+    const newPet = new Pet(name, age, animal, gender, breed, service );
+    
+    const petCardContainer = document.getElementById(petCardContainer);
+
+    const card = document.createElement("div");
+    card.className = "card shadow-sm";
+    card.style.width = "18rem";
+
+    const cardBody = document.createElement("div");
+    cardBody.className = "card-body";
+
+    const cardTitle = document.createElement("h3");
+    cardTitle.className = "card-title";
+    cardTitle.textContent = newPet.name;
+
+    cardBody.appendChild(cardTitle);
+    card.appendChild(cardBody);
+    petCardContainer.appendChild(card);
+}
+/*        
+        
+
+
+
+
+
+        
+/*
+
+    let pet1 = new Pet("Kobe", 4, "Dog", "Male", "Maltipoo","The Works")
+    let pet2 = new Pet("Pau", 1, "Dog", "Male", "Havapoo","The Works")
+    let pet3 = new Pet("Mia", 11, "Cat","Female", "Persian Himalayan","The Works")
 
     {
         name: "Kobe",
@@ -127,7 +194,4 @@ function updatePetNumber(){
 displayPetNames();
 displayAverageAge();
 updateTotalPets();
-
 */
-
-
