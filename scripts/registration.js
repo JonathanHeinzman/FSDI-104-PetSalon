@@ -74,7 +74,28 @@ function deleteRow(button){
         
 }
 
+// Change Mode Button
+$("#theme-switch").click(function () {
 
+    console.log("Theme switch...");
+    
+    // 1. Change the CSS Class
+    $("body").toggleClass("dark-mode");
+
+    // 2. Change text based on the mode
+
+    const isDark = $("body").hasClass("dark-mode");
+
+    if(isDark) {
+        $("#theme-icon").text("light_mode")
+        //$("h1").text("Dark Mode");
+    } else {
+        $("#theme-icon").text("dark_mode")
+        //("h1"$).text("Light Mode");
+    }
+
+
+});
 
 //class 4
 /*

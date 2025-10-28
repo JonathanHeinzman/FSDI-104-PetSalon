@@ -17,12 +17,14 @@ $("#servicesForm").on("submit", function (event) {
 
     console.log(`The values are: ${serviceName}, ${serviceDescription}, ${servicePrice}`);
 
-/*
+
     // 2. Validate the values
     if(!serviceName || !serviceDescription || servicePrice <= 0){
         // Assignment 1 (remove the alert)
         //alert("All values are required and the price must be greater than 0.");
-
+        $("#serviceName").addClass("error");
+        $("#serviceName").addClass("error");
+        $("#servicePrice").addClass("error");
         return;
     } else {
         // 3. Save the service - Assignment 3
@@ -30,7 +32,7 @@ $("#servicesForm").on("submit", function (event) {
         //alert("Service has been saved.");
 
     }
-*/
+
     $("input").removeClass("error");
 
         let isValid = true;
@@ -40,7 +42,7 @@ $("#servicesForm").on("submit", function (event) {
           isValid = false;
         }
         if (serviceDescription === "") {
-            $("#serviceDescription").addClass("error");
+            $("#serviceName").addClass("error");
             isValid = false;
         }
         if (servicePrice === "") {
@@ -48,13 +50,33 @@ $("#servicesForm").on("submit", function (event) {
           isValid = false;
         }
         
-        // Stop if invalid (no alerts)
         if (!isValid) return;
 
     // 4. Clear the form
     //$("#servicesForm")[0].reset();
      
-     $("input").removeClass("error");
-
+   
 }); 
 
+// Change Mode Button
+$("#theme-switch").click(function () {
+
+    console.log("Theme switch...");
+    
+    // 1. Change the CSS Class
+    $("body").toggleClass("dark-mode");
+
+    // 2. Change text based on the mode
+
+    const isDark = $("body").hasClass("dark-mode");
+
+    if(isDark) {
+        $("#theme-icon").text("light_mode")
+        //$("h1").text("Dark Mode");
+    } else {
+        $("#theme-icon").text("dark_mode")
+        //("h1"$).text("Light Mode");
+    }
+
+
+});
